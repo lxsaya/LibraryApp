@@ -21,12 +21,17 @@ public class UserService {
     public User createUser(String name) {
         User user = new User();
         user.setName(name);
-        return userRepository.save(user);
+        return userRepository.save(user);   // INSERT INTO library_user (...) VALUES (...);
     }
 
     public void bookBook(Long userId, Long bookId) {
+        // SELECT * FROM users WHERE id = ???;
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        // SELECT * FROM books WHERE id = ???;
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+
+        // INSERT INTO user_books (user_id, book_id)
+        // VALUES (???, ???);
         user.getBooks().add(book);
         userRepository.save(user);
     }
@@ -34,11 +39,16 @@ public class UserService {
     public void returnBook(Long userId, Long bookId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+
+        // DELETE FROM user_books
+        // WHERE user_id = ? AND book_id = ?;
         user.getBooks().remove(book);
         userRepository.save(user);
     }
 
     public Set<Book> getUserBooks(Long userId) {
+        //        SELECT b.* FROM books b
+        //        JOIN user_books ub ON b.id = ub.book_id WHERE ub.user_id = ?;
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         return user.getBooks();
     }

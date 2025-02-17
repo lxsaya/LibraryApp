@@ -17,15 +17,15 @@ public class BookService {
     public Book createBook(String title) {
         Book book = new Book();
         book.setTitle(title);
-        return bookRepository.save(book);
+        return bookRepository.save(book);   // INSERT INTO books (...) VALUES (...);
     }
 
     public List<Book> getAvailableBooks() {
-        return bookRepository.findAll();
+        return bookRepository.findAll();    // SELECT * FROM books
     }
 
     public void deleteBook(Long bookId) {
-        bookRepository.deleteById(bookId);
+        bookRepository.deleteById(bookId);    // DELETE FROM books WHERE id = ???(какое то id книги);
     }
 }
 
