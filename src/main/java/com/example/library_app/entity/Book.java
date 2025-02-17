@@ -15,6 +15,8 @@ public class Book {
 
     private String title;
 
+    private boolean isAvailable = true;
+
     public Book() {}
 
     public Book(String title) {
@@ -35,6 +37,14 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 }
 

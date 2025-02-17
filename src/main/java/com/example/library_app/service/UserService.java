@@ -25,14 +25,20 @@ public class UserService {
     }
 
     public void bookBook(Long userId, Long bookId) {
-        // SELECT * FROM users WHERE id = ???;
+        // SELECT * FROM library_user WHERE id = ???;
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         // SELECT * FROM books WHERE id = ???;
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
 
+        if (!book.isAvailable()) {
+            throw new RuntimeException("Book is already booked");
+        }
+
         // INSERT INTO user_books (user_id, book_id)
         // VALUES (???, ???);
         user.getBooks().add(book);
+        book.setAvailable(false);
+        bookRepository.save(book);
         userRepository.save(user);
     }
 
@@ -43,6 +49,8 @@ public class UserService {
         // DELETE FROM user_books
         // WHERE user_id = ? AND book_id = ?;
         user.getBooks().remove(book);
+        book.setAvailable(true);
+        bookRepository.save(book);
         userRepository.save(user);
     }
 

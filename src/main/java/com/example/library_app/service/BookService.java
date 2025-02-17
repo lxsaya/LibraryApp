@@ -21,7 +21,7 @@ public class BookService {
     }
 
     public List<Book> getAvailableBooks() {
-        return bookRepository.findAll();    // SELECT * FROM books
+        return bookRepository.findByIsAvailableTrue();    // SELECT * FROM books WHERE is_available = true;
     }
 
     public void deleteBook(Long bookId) {

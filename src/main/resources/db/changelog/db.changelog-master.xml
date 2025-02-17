@@ -20,6 +20,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="title" type="varchar(255)"/>
+            <column name="is_available" type="boolean" defaultValue="true"/>
         </createTable>
     </changeSet>
 
