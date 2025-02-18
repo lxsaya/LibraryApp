@@ -84,7 +84,7 @@
 						<configuration>
 							<changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</changeLogFile>
 							<url>jdbc:postgresql://localhost:5432/mydbForLibrary</url>
-							<username>saya</username>
+							<username>postgres</username>
 							<password>postgres</password>
 						</configuration>
 					</execution>

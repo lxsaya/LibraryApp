@@ -12,18 +12,5 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  liquibase:
-    image: liquibase:4.30.0
-    depends_on:
-      - postgres
-    volumes:
-      - ./db/changelog:/db/changelog
-    working_dir: /liquibase/changelog
-    command:
-      - --url=jdbc:postgresql://postgres:5432/mydbForLibrary
-      - --username=postgres
-      - --password=postgres
-      - update
-
 volumes:
   postgres_data:
